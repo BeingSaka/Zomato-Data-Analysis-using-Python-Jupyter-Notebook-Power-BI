@@ -1,0 +1,237 @@
+# Zomato Data Analysis Project jupyter Code
+
+# Importing Requied Libraries
+
+import pandas as pd #----------------pandas used for data manipulation & analysis
+import numpy as np # ----------------numpy used for numerical operation
+import matplotlib.pyplot as plt #----matplotlib used for Data Visualization
+import seaborn as sns#---------------seaborn used for Data Visualization
+
+#Creating New DataFrame
+df = pd.read_csv("zomato/Zomato data .csv")
+print(df)
+
+df.head(5)
+
+df.tail()
+
+df.info()
+
+# Lets Convert Data Type of "rate" column as its showing "object" and we want only Numerator part. 
+# so lets remove denominator part from "rate" column to get float data type 
+
+rate = 'rate'  # Define the column name as a string
+
+def handleRate(value):
+    try:
+        value = str(value).split('/')[0]
+        return float(value)
+    except (ValueError, IndexError):
+        return None  # or some default value like 0.0
+
+# Apply the function to the column
+df[rate] = df[rate].apply(handleRate)
+
+# Print the first few rows of the DataFrame
+print(df.head())
+
+print(df.rate)
+
+df.info()
+
+print(df.rate)
+
+# Check for null values in the entire DataFrame
+print("Null values in DataFrame:\n", df.isnull())
+
+# Check for null values in the entire DataFrame
+print("Null values in DataFrame:\n", df.isnull().sum())
+
+df = df.rename(columns=lambda x: x.strip() if x.strip() == 'name' else x) #removing space in name column
+print(df)
+
+df.info()
+
+# Set the plot style and context
+sns.set(style="whitegrid", context="talk")
+
+# Create a count plot
+plt.figure(figsize=(7, 5))
+bar_plot = sns.countplot(x=df['listed_in(type)'], palette='viridis')
+
+# Customize the title and labels
+plt.title("Count of Restaurants by Type", fontsize=20, color='darkblue')
+plt.xlabel("Type of Restaurant", fontsize=14, color='darkgreen')
+plt.ylabel("Count", fontsize=14, color='darkgreen')
+
+# Rotate x-axis labels for better readability
+plt.xticks(rotation=45, fontsize=12, color='darkred')
+
+# Add count labels on top of the bars
+for p in bar_plot.patches:
+    bar_plot.annotate(format(p.get_height(), '.0f'), 
+                      (p.get_x() + p.get_width() / 2., p.get_height()), 
+                      ha='center', va='center', 
+                      xytext=(0, 10), 
+                      textcoords='offset points',
+                      fontsize=12, color='black')
+
+# Show the plot
+plt.show()
+# Conclusion 
+# The Majority of the restaurants fall into the "Dinning" category
+# "Dinning" Restaurants are preferred by larger number of indivduals.
+
+# The Majority of Restaurants Ratings received
+# Group data by 'listed_in(type)' and sum the 'votes'
+grouped_data = df.groupby('listed_in(type)')['votes'].sum()
+
+# Convert the grouped data into a DataFrame
+result = pd.DataFrame({'votes': grouped_data}).reset_index()
+
+# Plot the result
+plt.figure(figsize=(7, 5))
+plt.plot(result['listed_in(type)'], result['votes'], color="green", marker="o", linestyle='-', linewidth=2, markersize=8)
+
+# Customize the title and labels with more details
+plt.title("Total Votes by Type of Restaurant", fontsize=24, color='navy')
+plt.xlabel("Type of Restaurant", fontsize=18, color="red", labelpad=15)
+plt.ylabel("Total Votes", fontsize=18, color="red", labelpad=15)
+
+# Rotate x-axis labels for better readability
+plt.xticks(rotation=45, fontsize=12, color='darkblue')
+
+# Customize y-axis labels
+plt.yticks(fontsize=12, color='darkblue')
+
+# Adding grid for better readability
+plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+
+# Adding annotations for each point on the plot
+for i in range(len(result)):
+    plt.text(result['listed_in(type)'][i], result['votes'][i] + 5,  # Add a small offset for better visibility
+             f'{result["votes"][i]:,.0f}', ha='center', va='bottom', fontsize=10, color='black')
+
+# Show the plot
+plt.tight_layout()
+plt.show()
+# Conclusion 
+# The Majority of the Rating restaurants fall into the "Dinning" category
+
+# Create a histogram for the 'rate' column with 5 bins
+plt.figure(figsize=(10, 6))
+plt.hist(df['rate'], bins=5, color='skyblue', edgecolor='black', alpha=0.7)
+
+# Customize the title and labels with more details
+plt.title("Rating Distribution", fontsize=24, color='navy', pad=20)
+plt.xlabel("Rating", fontsize=18, color='darkgreen', labelpad=15)
+plt.ylabel("Frequency", fontsize=18, color='darkgreen', labelpad=15)
+
+# Customize the x and y axis ticks
+plt.xticks(fontsize=12, color='darkred')
+plt.yticks(fontsize=12, color='darkred')
+
+# Add grid lines for better readability
+plt.grid(axis='y', linestyle='--', linewidth=0.5)
+
+# Display the plot
+plt.tight_layout()
+plt.show()
+# Conclusion: The Majority of restaurants received ratings ranging from 3.5 to 4.
+# The Majority of couples prefer Restaurants with an approximate cost of 300 rupees
+
+# Example DataFrame setup (replace this with your actual DataFrame)
+# df = pd.read_csv('your_data.csv')  # Uncomment and modify to load your actual data
+
+# Extract the 'approx_cost(for two people)' column
+couple_data = df['approx_cost(for two people)']
+
+# Set the plot style and context
+sns.set(style="whitegrid", context="talk")
+
+# Create a count plot
+plt.figure(figsize=(12, 8))
+count_plot = sns.countplot(x=couple_data, palette='viridis')
+
+# Customize the title and labels
+plt.title("Distribution of Approximate Cost for Two People", fontsize=24, color='navy', pad=20)
+plt.xlabel("Approximate Cost (for two people)", fontsize=18, color='darkgreen', labelpad=15)
+plt.ylabel("Count", fontsize=18, color='darkgreen', labelpad=15)
+
+# Rotate x-axis labels for better readability
+plt.xticks(rotation=45, fontsize=12, color='darkred')
+
+# Customize y-axis labels
+plt.yticks(fontsize=12, color='darkred')
+
+# Add grid lines for better readability
+plt.grid(axis='y', linestyle='--', linewidth=0.5)
+
+# Adding count labels on top of the bars
+for p in count_plot.patches:
+    count_plot.annotate(format(p.get_height(), '.0f'),
+                        (p.get_x() + p.get_width() / 2., p.get_height()),
+                        ha='center', va='center',
+                        xytext=(0, 10),
+                        textcoords='offset points',
+                        fontsize=12, color='black')
+
+# Adjust layout to fit elements within the figure
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+# Whether the online Orders receive a Higher Ratings than Offline Orders
+
+# Set the plot style and context
+sns.set(style="whitegrid", context="talk")
+
+# Create the boxplot
+plt.figure(figsize=(8, 6))  # Adjusted size for better readability
+box_plot = sns.boxplot(x='online_order', y='rate', data=df, palette='Set2')
+
+# Customize the title and labels with more details
+plt.title("Distribution of Ratings by Online Order Status", fontsize=20, color='navy', pad=20)
+plt.xlabel("Online Order Status", fontsize=16, color='darkgreen', labelpad=15)
+plt.ylabel("Rating", fontsize=16, color='darkgreen', labelpad=15)
+
+# Customize x and y axis ticks
+plt.xticks(fontsize=12, color='darkred')
+plt.yticks(fontsize=12, color='darkred')
+
+# Add grid lines for better readability
+plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+
+# Show the plot
+plt.tight_layout()
+plt.show()
+# Conclusion: Offline Orders Received Lower Rating in comparison to Online Orders,
+# which obtained excellent ratings.
+
+# Create a pivot table
+pivot_table = df.pivot_table(index='listed_in(type)', columns='online_order', aggfunc='size', fill_value=0)
+
+# Set the plot style and context
+sns.set(style="whitegrid", context="talk")
+
+# Create the heatmap
+plt.figure(figsize=(10, 8))  # Adjust size for better readability
+heatmap = sns.heatmap(pivot_table, annot=True, cmap="YlGnBu", fmt='d', linewidths=0.5, linecolor='black')
+
+# Customize the title and labels
+plt.title("Heatmap of Online Orders by Restaurant Type", fontsize=20, color='navy', pad=20)
+plt.xlabel("Online Order Status", fontsize=16, color='darkgreen', labelpad=15)
+plt.ylabel("Listed In (Type)", fontsize=16, color='darkgreen', labelpad=15)
+
+# Customize x and y axis ticks
+plt.xticks(fontsize=12, color='darkred')
+plt.yticks(fontsize=12, color='darkred')
+
+# Show the plot
+plt.tight_layout()
+plt.show()
+
+<h2 style="background-color:#f0f8ff; color:#003366; padding:10px;">Conclusion</h2>
+<p style="background-color:#f8f8ff; color:#333333; font-size:16px; padding:15px; border-radius:5px;">
+    <strong>Dining Restaurants</strong> primarily accept <strong>offline orders</strong>, whereas <strong>cafes</strong> primarily receive <strong>online orders</strong>. This suggests that clients prefer to place orders <strong>in person</strong> at restaurants, but prefer <strong>online ordering</strong> at cafes.
+</p>
