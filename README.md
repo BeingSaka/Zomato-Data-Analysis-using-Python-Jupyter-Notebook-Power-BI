@@ -1,6 +1,4 @@
 
-Here’s a README.md template you can use for your GitHub repository for the Zomato Data Analysis Project:
-
 Zomato Data Analysis Project
 Overview
 This project analyzes customer and restaurant data from Zomato's food delivery service. The goal is to explore key insights using Python, Jupyter Notebook, and Power BI, with a focus on exploratory data analysis (EDA) and visualization to help Zomato make data-driven decisions.
