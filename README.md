@@ -15,56 +15,22 @@ This project analyzes customer and restaurant data from Zomato's food delivery s
 * Seaborn & Matplotlib: For data visualizations.
 * Power BI: For creating a dynamic dashboard with insights.
 
+# Project Snap
+<img width="588" alt="zomato report snap" src="https://github.com/user-attachments/assets/5bfb35c1-d0ff-42b5-a4e4-ca18bcac5ff3" />
+
+
 # Dataset
 - <a href ="https://github.com/BeingSaka/Zomato-Data-Analysis-using-Python-Jupyter-Notebook-Power-BI/blob/main/Zomato%20data%20.csv" > Zomato Dataset.csv</a>
 
-name: Restaurant name.
-online_order: Whether the restaurant accepts online orders.
-book_table: Whether table booking is available.
-rate: Restaurant ratings.
-votes: Customer votes.
-approx_cost(for two people): Estimated cost for two people.
-listed_in(type): Restaurant type (e.g., cafe, dining).
-Key Features
-Data Cleaning: Handling missing values, outliers, and inconsistent data.
-Exploratory Data Analysis (EDA): Identifying trends, correlations, and distributions within the dataset.
-Data Visualizations: Count plots, bar charts, and other visual representations using Seaborn and Matplotlib.
-Power BI Dashboard: A user-friendly interface to visualize restaurant and customer trends.
-Installation and Setup
-To run the project locally:
+# Usage
+* This project can help Zomato analyze:
+* Customer preferences for online and offline orders.
+* Cost distribution of dining and cafe experiences.
+* Insights into customer ratings and votes.
+* The Power BI dashboard provides an interactive way to filter and view specific insights.
 
-Clone the repository:
+# Contributions
+* Feel free to open issues or submit pull requests if you'd like to contribute to the project.
 
-bash
-Copy code
-git clone https://github.com/your-username/zomato-data-analysis.git
-Navigate to the project directory:
-
-bash
-Copy code
-cd zomato-data-analysis
-Install required Python libraries:
-
-bash
-Copy code
-pip install -r requirements.txt
-Run the Jupyter Notebook:
-
-bash
-Copy code
-jupyter notebook
-For Power BI, load the dataset and open the provided .pbix file to view the dashboard.
-
-Usage
-This project can help Zomato analyze:
-
-Customer preferences for online and offline orders.
-Cost distribution of dining and cafe experiences.
-Insights into customer ratings and votes.
-The Power BI dashboard provides an interactive way to filter and view specific insights.
-
-Contributions
-Feel free to open issues or submit pull requests if you'd like to contribute to the project.
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+# License
+* This project is licensed under the MIT License - see the LICENSE file for details.
