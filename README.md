@@ -1,20 +1,22 @@
 
-Zomato Data Analysis Project
-Overview
+# Zomato Data Analysis Project
+# Overview
 This project analyzes customer and restaurant data from Zomato's food delivery service. The goal is to explore key insights using Python, Jupyter Notebook, and Power BI, with a focus on exploratory data analysis (EDA) and visualization to help Zomato make data-driven decisions.
 
-Project Objectives
-Analyze Zomato’s dataset to uncover trends and patterns in customer behavior.
-Explore restaurant partner statistics and their contribution to the platform's success.
-Perform Exploratory Data Analysis (EDA) to understand the distribution of variables.
-Create data visualizations that highlight important business insights.
-Tools and Technologies
-Python: Data manipulation and analysis.
-Pandas: For data loading and DataFrame operations.
-Seaborn & Matplotlib: For data visualizations.
-Power BI: For creating a dynamic dashboard with insights.
-Dataset
-The dataset contains customer and restaurant information from Zomato’s platform. Key columns include:
+# Project Objectives
+* Analyze Zomato’s dataset to uncover trends and patterns in customer behavior.
+* Explore restaurant partner statistics and their contribution to the platform's success.
+* Perform Exploratory Data Analysis (EDA) to understand the distribution of variables.
+* Create data visualizations that highlight important business insights.
+
+# Tools and Technologies
+* Python: Data manipulation and analysis.
+* Pandas: For data loading and DataFrame operations.
+* Seaborn & Matplotlib: For data visualizations.
+* Power BI: For creating a dynamic dashboard with insights.
+
+# Dataset
+- <a href ="https://github.com/BeingSaka/Zomato-Data-Analysis-using-Python-Jupyter-Notebook-Power-BI/blob/main/Zomato%20data%20.csv" > Zomato Dataset.csv</a>
 
 name: Restaurant name.
 online_order: Whether the restaurant accepts online orders.
